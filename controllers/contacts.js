@@ -23,7 +23,7 @@ const deleteContact = async (req, res) => {
 	const deletedContact = await Contact.findByIdAndDelete(contactId);
 
 	if(deletedContact === null){
-		return res.status(401).json('Not contact with ${id}')
+		return res.status(401).json('Not contact with ${id}');
 	};
 
 	res.json(deletedContact);
