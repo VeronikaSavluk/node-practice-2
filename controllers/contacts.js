@@ -1,4 +1,5 @@
 const Contact = require('../model/contacts');
+const Note = require('../model/notes')
 
 const getContacts = async (req, res) => {
 	const allContacts = await Contact.find().populate('notes', {
@@ -28,7 +29,7 @@ const deleteContact = async (req, res) => {
 	if(deletedContact === null){
 		return res.status(401).json('Not contact with ${id}');
 	};
-
+	await Note.deleteMany({ contact: contactId });
 	res.json(deletedContact);
 };
 
