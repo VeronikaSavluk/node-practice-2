@@ -1,7 +1,10 @@
 const Contact = require('../model/contacts');
 
 const getContacts = async (req, res) => {
-	const allContacts = await Contact.find();
+	const allContacts = await Contact.find().populate('notes', {
+		title: 1,
+		text: 1,
+	});
 
 	if(allContacts.length === 0){
 		return res.status(400).json({message: 'No contacts'});
@@ -29,8 +32,16 @@ const deleteContact = async (req, res) => {
 	res.json(deletedContact);
 };
 
+const updateContact = async (req, res) => { 
+	const { contactId } = req.params;
+
+	const updatedContact = await Contact.findByIdAndUpdate(contactId, { $push: { notes: req.body.notesId } }, { new: true });
+	res.json(updatedContact);
+}
+
 module.exports = {
 	getContacts,
 	createContact,
 	deleteContact,
+	updateContact
 };

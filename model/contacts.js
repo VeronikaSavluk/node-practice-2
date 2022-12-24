@@ -7,6 +7,10 @@ const contactSchema = Schema({
 	number: {
 		type: String,
 	},
+	notes: [{
+		type: Schema.Types.ObjectId,
+		ref: 'note'
+	}]
 });
 
 const Contact = model('contact', contactSchema);
