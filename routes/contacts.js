@@ -4,6 +4,6 @@ const {getContacts, createContact, deleteContact} = require('../controllers/cont
 
 router.get('/', getContacts);
 router.post('/', createContact);
-router.delete('/', deleteContact);
+router.delete('/:contactId', deleteContact);
 
 module.exports = router;
