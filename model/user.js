@@ -7,4 +7,14 @@ const userSchema = Schema({
 	email: {
 		type: String,
 	},
-})
+	password: {
+		type: String,
+	},
+	token: {
+		type: String,
+	}
+});
+
+const User = model('user', userSchema);
+
+module.exports = User;
